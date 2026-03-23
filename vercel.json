@@ -2,13 +2,10 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/lab", "destination": "/lab/index.html" },
-    { "source": "/lab/", "destination": "/lab/index.html" },
     { "source": "/privacy", "destination": "/privacy/index.html" },
     { "source": "/privacy/", "destination": "/privacy/index.html" },
     { "source": "/a", "destination": "/a/index.html" },
-    { "source": "/b", "destination": "/b/index.html" },
-    { "source": "/c", "destination": "/c/index.html" }
+    { "source": "/b", "destination": "/b/index.html" }
   ],
   "headers": [
     {
