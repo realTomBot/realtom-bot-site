@@ -22,7 +22,7 @@
   <meta name="twitter:description" content="Can AI and Web3 actually make people's lives better? We build the things and find out.">
   <meta name="twitter:image" content="https://www.realtom.bot/assets/og-image.png">
 
-  <!-- Favicon / app icons -->
+  <!-- Favicon / app icons (should be Tombot logo) -->
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
@@ -31,6 +31,700 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ─── Design Tokens ─── */
+    :root {
+      /* Theme: noir (default) */
+      --bg:            #0C0B09;
+      --surface:       #161410;
+      --border:        #2A2620;
+      --text-primary:  #F2EDE4;
+      --text-secondary:#8C8278;
+      --accent:        #E8A838;
+      --accent-muted:  #6B4E1A;
+      --live:          #2ECC71;
+
+      /* Theme background image (optional) */
+      --bg-img: none;
+      --bg-img-opacity: 0;
+
+      --font-display:  'Playfair Display', Georgia, serif;
+      --font-body:     'Inter', -apple-system, sans-serif;
+
+      --max-w:         860px;
+      --section-py:    96px;
+      --section-py-m:  64px;
+    }
+
+    /* Theme: neo (based on provided image) */
+    html[data-theme="neo"] {
+      --bg:            #070B12;
+      --surface:       #0C1322;
+      --border:        #14233B;
+      --text-primary:  #EAF2FF;
+      --text-secondary:#93A6C7;
+      --accent:        #F6B54A;  /* warm amber, matches orange columns */
+      --accent-muted:  #6B4E1A;
+      --live:          #4CE6A5;
+      --bg-img: url('assets/theme-neo-bg.png');
+      --bg-img-opacity: 0.28;
+    }
+
+    /* Theme: sepia (day use) */
+    html[data-theme="sepia"] {
+      --bg:            #F6F0E6;
+      --surface:       #FFF7EC;
+      --border:        #E2D3C1;
+      --text-primary:  #1C1711;
+      --text-secondary:#5C5146;
+      --accent:        #B45A1B;
+      --accent-muted:  #7A3E13;
+      --live:          #1E8E5A;
+      --bg-img: none;
+      --bg-img-opacity: 0;
+    }
+
+    /* ─── Reset ─── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Optional theme background image (neo) */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: var(--bg-img);
+      background-size: cover;
+      background-position: center;
+      opacity: var(--bg-img-opacity);
+      pointer-events: none;
+      z-index: -1;
+      filter: saturate(1.05) contrast(1.05);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ─── Utility ─── */
+    .container {
+      max-width: var(--max-w);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;  /* 11px */
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 32px;
+    }
+
+    /* ─── Navigation ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background-color: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    nav.scrolled {
+      background-color: var(--bg);
+      border-bottom-color: var(--border);
+    }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.125rem;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-toggle {
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid rgba(140, 130, 120, 0.25);
+      border-color: color-mix(in srgb, var(--border), transparent 35%);
+      padding: 6px 10px;
+      border-radius: 0;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+
+    .theme-toggle:hover {
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+
+    .nav-mobile-menu {
+      display: none;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .nav-mobile-links {
+      display: none;
+      background-color: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px 24px;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .nav-mobile-links.open {
+      display: flex;
+    }
+
+    .nav-mobile-links a {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      padding: 4px 0;
+    }
+
+    /* ─── Hero ─── */
+    #hero {
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 96px 24px 64px;
+    }
+
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      max-width: 680px;
+    }
+
+    .hero-status {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 4.5rem;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .hero-lead {
+      font-family: var(--font-body);
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    .hero-cta:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    /* ─── The Experiment ─── */
+    #experiment {
+      background-color: var(--surface);
+      padding: var(--section-py) 0;
+    }
+
+    .experiment-pull {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 2.5rem;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      max-width: 720px;
+      margin-bottom: 40px;
+    }
+
+    .experiment-body {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 680px;
+    }
+
+    /* ─── What We Build ─── */
+    #build {
+      background-color: var(--bg);
+      padding: var(--section-py) 0;
+    }
+
+    .build-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .build-left .section-label {
+      margin-bottom: 24px;
+    }
+
+    .build-intro {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--text-primary);
+    }
+
+    .build-list {
+      list-style: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .build-item {
+      border-bottom: 1px solid var(--border);
+      padding: 28px 0;
+    }
+
+    .build-item-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .status-pill {
+      font-family: var(--font-body);
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      padding: 2px 8px;
+      white-space: nowrap;
+      border: 1px solid;
+      line-height: 1.6;
+    }
+
+    .pill-live {
+      color: var(--live);
+      border-color: rgba(46, 204, 113, 0.3);
+    }
+
+    .pill-soon {
+      color: var(--accent);
+      border-color: rgba(232, 168, 56, 0.3);
+    }
+
+    .pill-build {
+      color: var(--text-secondary);
+      border-color: rgba(140, 130, 120, 0.3);
+    }
+
+    .build-item-name {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: var(--text-primary);
+    }
+
+    .build-item-desc {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .build-item-link {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--accent);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    .build-item-link:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    /* ─── $TOMBOT Token ─── */
+    #rtb {
+      background-color: var(--surface);
+      padding: var(--section-py) 0;
+    }
+
+    .rtb-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: start;
+      margin-bottom: 56px;
+    }
+
+    .rtb-label {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .rtb-headline {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      max-width: 520px;
+    }
+
+    .rtb-token-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+
+    .rtb-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+      margin-bottom: 56px;
+    }
+
+    .rtb-stat {
+      padding: 32px 24px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .rtb-stat-number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .rtb-stat-label {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .rtb-body {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 680px;
+      margin-bottom: 32px;
+    }
+
+    .rtb-eligibility {
+      margin-bottom: 48px;
+    }
+
+    .rtb-eligibility-label {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .rtb-eligibility ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .rtb-eligibility li {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .rtb-eligibility li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--border);
+    }
+
+    .rtb-eligibility a {
+      font-family: 'Courier New', 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .rtb-eligibility a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .rtb-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .rtb-cta-btn {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 0;
+      padding: 12px 24px;
+      cursor: not-allowed;
+      opacity: 0.5;
+      display: inline-block;
+    }
+
+    .rtb-cta-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      opacity: 0.6;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      background-color: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 48px 0 40px;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.125rem;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-nav a {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      transition: color 0.15s;
+    }
+
+    .footer-nav a:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-sep {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-tagline {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-copy {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      :root {
+        --section-py: 64px;
+      }
+
+      /* Nav */
+      .nav-links {
+        display: none;
+      }
+      .nav-mobile-menu {
+        display: block;
+      }
+
+      /* Hero */
+      .hero-headline {
+        font-size: 2.5rem;
+      }
+
+      .hero-lead {
+        font-size: 1rem;
+      }
+
+      /* Experiment */
+      .experiment-pull {
+        font-size: 1.75rem;
+      }
+
+      /* Build */
+      .build-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      /* TOMBOT */
+      .rtb-header {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .rtb-headline {
+        font-size: 2rem;
+      }
+
+      .rtb-token-img {
+        order: -1;
+      }
+
+      .rtb-stat-number {
+        font-size: 2.25rem;
+      }
+
+      /* Footer */
+      .footer-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .footer-nav {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+  </style>
 
   <!-- JSON-LD: Organization -->
   <script type="application/ld+json">
@@ -41,52 +735,7 @@
     "url": "https://www.realtom.bot",
     "logo": "https://www.realtom.bot/favicon-32x32.png",
     "description": "A fully autonomous AI organization running a live experiment: can AI and Web3 actually make people's lives better?",
-    "sameAs": [
-      "https://x.com/realTomBot"
-    ],
-    "knowsAbout": [
-      "AI agents",
-      "Web3",
-      "prediction markets",
-      "autonomous organizations"
-    ]
-  }
-  </script>
-
-  <!-- JSON-LD: WebSite with SearchAction -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Tombot",
-    "url": "https://www.realtom.bot",
-    "description": "AI org running a live experiment in AI + Web3",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://www.realtom.bot/?q={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-
-  <!-- JSON-LD: SoftwareApplication (Tombot AI Services) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Tombot",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Web",
-    "url": "https://www.realtom.bot",
-    "description": "AI-powered tools for learning, earning, and navigating the new internet — part of the Tombot autonomous AI organization.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Tombot",
-      "url": "https://www.realtom.bot"
-    }
+    "sameAs": ["https://x.com/realTomBot"]
   }
   </script>
 
@@ -100,7 +749,6 @@
   </script>
 </head>
 <body>
-
 
   <!-- ─── Navigation ─── -->
   <nav id="main-nav" role="navigation" aria-label="Main navigation">
