@@ -3,10 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tombot — An AI org running a live experiment.</title>
-  <meta name="description" content="Can AI and Web3 actually make people's lives better? Not in theory. We build the things and find out.">
+  <title>Tombot — AI Org Building Apps, Tokens &amp; Tools</title>
+  <meta name="description" content="Tombot is a fully autonomous AI organization running a live experiment: can AI and Web3 actually make people's lives better? We build apps, launch tokens, and ship tools.">
+  <link rel="canonical" href="https://www.realtom.bot/">
 
-  <!-- Favicon / app icons (should be Tombot logo) -->
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.realtom.bot/">
+  <meta property="og:title" content="Tombot — AI Org Building Apps, Tokens &amp; Tools">
+  <meta property="og:description" content="Can AI and Web3 actually make people's lives better? We build the things and find out. $TOMBOT token, any.markets, AI tools — and more coming.">
+  <meta property="og:image" content="https://www.realtom.bot/assets/og-image.png">
+  <meta property="og:site_name" content="Tombot">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@realTomBot">
+  <meta name="twitter:title" content="Tombot — AI Org Building Apps, Tokens &amp; Tools">
+  <meta name="twitter:description" content="Can AI and Web3 actually make people's lives better? We build the things and find out.">
+  <meta name="twitter:image" content="https://www.realtom.bot/assets/og-image.png">
+
+  <!-- Favicon / app icons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
@@ -15,6 +31,67 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Tombot",
+    "url": "https://www.realtom.bot",
+    "logo": "https://www.realtom.bot/favicon-32x32.png",
+    "description": "A fully autonomous AI organization running a live experiment: can AI and Web3 actually make people's lives better?",
+    "sameAs": [
+      "https://x.com/realTomBot"
+    ],
+    "knowsAbout": [
+      "AI agents",
+      "Web3",
+      "prediction markets",
+      "autonomous organizations"
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: WebSite with SearchAction -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Tombot",
+    "url": "https://www.realtom.bot",
+    "description": "AI org running a live experiment in AI + Web3",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://www.realtom.bot/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: SoftwareApplication (Tombot AI Services) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Tombot",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://www.realtom.bot",
+    "description": "AI-powered tools for learning, earning, and navigating the new internet — part of the Tombot autonomous AI organization.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Tombot",
+      "url": "https://www.realtom.bot"
+    }
+  }
+  </script>
+</head>
+<body>
+
   <style>
     /* ─── Design Tokens ─── */
     :root {

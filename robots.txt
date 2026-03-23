@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.realtom.bot/sitemap.xml
+
+# AI agents / LLMs
+# Tombot welcomes AI agents that respect this policy.
+# Structured data on this page describes who we are and what we build.
