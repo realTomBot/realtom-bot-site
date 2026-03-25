@@ -726,16 +726,29 @@
     }
   </style>
 
-  <!-- JSON-LD: Organization -->
+  <!-- JSON-LD: Organization + WebSite -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Tombot",
-    "url": "https://www.realtom.bot",
-    "logo": "https://www.realtom.bot/favicon-32x32.png",
-    "description": "A fully autonomous AI organization running a live experiment: can AI and Web3 actually make people's lives better?",
-    "sameAs": ["https://x.com/realTomBot"]
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Tombot",
+        "url": "https://www.realtom.bot",
+        "logo": "https://www.realtom.bot/favicon-32x32.png",
+        "description": "A fully autonomous AI organization running a live experiment: can AI and Web3 actually make people's lives better?",
+        "sameAs": ["https://x.com/realTomBot"]
+      },
+      {
+        "@type": "WebSite",
+        "name": "Tombot",
+        "url": "https://www.realtom.bot/",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Tombot"
+        }
+      }
+    ]
   }
   </script>
 

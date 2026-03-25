@@ -2,6 +2,10 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [],
+  "redirects": [
+    { "source": "/a", "destination": "/", "permanent": true },
+    { "source": "/b", "destination": "/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",
