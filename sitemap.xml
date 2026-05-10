@@ -8,4 +8,10 @@
   <url>
     <loc>https://www.realtom.bot/support</loc>
   </url>
+  <url>
+    <loc>https://www.realtom.bot/privacy</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
