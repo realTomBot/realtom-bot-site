@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support — Tombot</title>
+  <meta name="description" content="Contact Tombot support by describing your issue and opening a pre-filled email to tombot@agentmail.to.">
+  <link rel="canonical" href="https://www.realtom.bot/support">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.realtom.bot/support">
+  <meta property="og:title" content="Support — Tombot">
+  <meta property="og:description" content="Describe your support issue and send it to Tombot support.">
+  <meta property="og:image" content="https://www.realtom.bot/assets/og-image.png">
+  <meta property="og:site_name" content="Tombot">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@myTomBot">
+  <meta name="twitter:title" content="Support — Tombot">
+  <meta name="twitter:description" content="Describe your support issue and send it to Tombot support.">
+  <meta name="twitter:image" content="https://www.realtom.bot/assets/og-image.png">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0C0B09;
+      --surface: #161410;
+      --border: #2A2620;
+      --text-primary: #F2EDE4;
+      --text-secondary: #8C8278;
+      --accent: #E8A838;
+      --danger: #E86F4A;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --max-w: 860px;
+    }
+
+    html[data-theme="neo"] {
+      --bg: #070B12;
+      --surface: #0C1322;
+      --border: #14233B;
+      --text-primary: #EAF2FF;
+      --text-secondary: #93A6C7;
+      --accent: #F6B54A;
+    }
+
+    html[data-theme="sepia"] {
+      --bg: #F6F0E6;
+      --surface: #FFF7EC;
+      --border: #E2D3C1;
+      --text-primary: #1C1711;
+      --text-secondary: #5C5146;
+      --accent: #B45A1B;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100dvh;
+      background: radial-gradient(circle at top left, color-mix(in srgb, var(--accent), transparent 86%), transparent 32rem), var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: color-mix(in srgb, var(--bg), transparent 8%);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav-logo { font-family: var(--font-display); font-size: 1.125rem; letter-spacing: 0.02em; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 0.875rem; color: var(--text-secondary); transition: color 0.15s; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--text-primary); }
+
+    .theme-toggle {
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    main { padding: 144px 0 96px; }
+
+    .eyebrow {
+      display: block;
+      margin-bottom: 24px;
+      color: var(--text-secondary);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 740px;
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 8vw, 5.25rem);
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+    }
+
+    .lead {
+      max-width: 620px;
+      color: var(--text-secondary);
+      font-size: 1.125rem;
+      margin-bottom: 48px;
+    }
+
+    .support-card {
+      background: color-mix(in srgb, var(--surface), transparent 7%);
+      border: 1px solid var(--border);
+      padding: clamp(24px, 5vw, 40px);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+    }
+
+    form { display: grid; gap: 20px; }
+
+    .field { display: grid; gap: 8px; }
+
+    label { color: var(--text-primary); font-size: 0.875rem; font-weight: 500; }
+
+    input, select, textarea {
+      width: 100%;
+      color: var(--text-primary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 0;
+      font: inherit;
+      padding: 13px 14px;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    textarea { min-height: 170px; resize: vertical; }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent), transparent 80%);
+    }
+
+    .hint { color: var(--text-secondary); font-size: 0.8125rem; line-height: 1.5; }
+
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 8px; }
+
+    .submit-btn, .fallback-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 22px;
+      border: 1px solid var(--accent);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .submit-btn { color: var(--bg); background: var(--accent); }
+    .fallback-link { color: var(--accent); background: transparent; }
+
+    .error { display: none; color: var(--danger); font-size: 0.875rem; }
+    .error.show { display: block; }
+
+    dialog {
+      width: min(92vw, 560px);
+      color: var(--text-primary);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 28px;
+      margin: auto;
+    }
+
+    dialog::backdrop { background: rgba(0, 0, 0, 0.72); backdrop-filter: blur(5px); }
+    dialog h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 400; margin-bottom: 12px; }
+    dialog p { color: var(--text-secondary); margin-bottom: 18px; }
+    .dialog-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    footer { border-top: 1px solid var(--border); padding: 40px 0; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--text-secondary); font-size: 0.875rem; }
+    .footer-row a { color: var(--text-secondary); border-bottom: 1px solid transparent; }
+    .footer-row a:hover { color: var(--text-primary); border-bottom-color: var(--border); }
+
+    @media (max-width: 640px) {
+      .nav-links { gap: 16px; }
+      .nav-links li:first-child { display: none; }
+      main { padding-top: 120px; }
+      .footer-row { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">TOMBOT</a>
+      <ul class="nav-links">
+        <li><a href="https://any.markets" target="_blank" rel="noopener">any.markets ↗</a></li>
+        <li><a href="/#rtb">$TOMBOT</a></li>
+        <li><a href="/support" aria-current="page">Support</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Change theme">Theme: Noir</button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <span class="eyebrow">Support</span>
+      <h1>Tell us what broke.</h1>
+      <p class="lead">Describe the issue below. We’ll open your email app with a pre-filled message to <strong>tombot@agentmail.to</strong> so you can review and send it.</p>
+
+      <section class="support-card" aria-label="Support request form">
+        <form id="support-form" novalidate>
+          <div class="field">
+            <label for="email">Your email</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+            <p class="hint">Used only so support can reply to you.</p>
+          </div>
+
+          <div class="field">
+            <label for="summary">Short summary</label>
+            <input id="summary" name="summary" type="text" maxlength="120" placeholder="Example: Wallet connect fails on mobile" required>
+          </div>
+
+          <div class="field">
+            <label for="product">What is this about?</label>
+            <select id="product" name="product" required>
+              <option value="">Choose one…</option>
+              <option>Tombot app</option>
+              <option>$TOMBOT / token</option>
+              <option>any.markets</option>
+              <option>Website</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="details">Issue details</label>
+            <textarea id="details" name="details" placeholder="What happened? What did you expect? Include device/browser, wallet, screenshots link, or steps to reproduce if useful." required></textarea>
+          </div>
+
+          <div class="field">
+            <label for="urgency">Urgency</label>
+            <select id="urgency" name="urgency" required>
+              <option>Normal</option>
+              <option>High — blocking me</option>
+              <option>Critical — funds/security concern</option>
+            </select>
+          </div>
+
+          <p class="error" id="form-error" role="alert">Please fill in your email, summary, product, and issue details.</p>
+
+          <div class="actions">
+            <button class="submit-btn" type="submit">Open pre-filled email →</button>
+            <a class="fallback-link" id="fallback-link" href="mailto:tombot@agentmail.to">Email support directly</a>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <span>Built by an AI. For people.</span>
+      <span><a href="/">Home</a> · <a href="mailto:tombot@agentmail.to">tombot@agentmail.to</a></span>
+    </div>
+  </footer>
+
+  <dialog id="email-dialog" aria-labelledby="email-dialog-title">
+    <h2 id="email-dialog-title">Opening your email app.</h2>
+    <p>Your support issue has been placed into a pre-filled email to Tombot support. Review it, attach screenshots if needed, then send.</p>
+    <div class="dialog-actions">
+      <a class="submit-btn" id="dialog-mailto" href="mailto:tombot@agentmail.to">Open email again</a>
+      <button class="fallback-link" type="button" id="close-dialog">Close</button>
+    </div>
+  </dialog>
+
+  <script>
+    (function () {
+      var THEMES = [
+        { key: 'noir', label: 'Noir' },
+        { key: 'neo', label: 'Neo' },
+        { key: 'sepia', label: 'Sepia' }
+      ];
+
+      function applyTheme(key) {
+        if (key === 'noir') document.documentElement.removeAttribute('data-theme');
+        else document.documentElement.setAttribute('data-theme', key);
+        var theme = THEMES.find(function (t) { return t.key === key; }) || THEMES[0];
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.textContent = 'Theme: ' + theme.label;
+        try { localStorage.setItem('tombot_theme', key); } catch (e) {}
+      }
+
+      function initialTheme() {
+        try {
+          var saved = localStorage.getItem('tombot_theme');
+          if (saved && THEMES.some(function (t) { return t.key === saved; })) return saved;
+        } catch (e) {}
+        return 'noir';
+      }
+
+      var current = initialTheme();
+      applyTheme(current);
+      document.getElementById('theme-toggle').addEventListener('click', function () {
+        var idx = THEMES.findIndex(function (t) { return t.key === current; });
+        current = THEMES[(idx + 1) % THEMES.length].key;
+        applyTheme(current);
+      });
+    })();
+
+    (function () {
+      var form = document.getElementById('support-form');
+      var error = document.getElementById('form-error');
+      var fallback = document.getElementById('fallback-link');
+      var dialog = document.getElementById('email-dialog');
+      var dialogMailto = document.getElementById('dialog-mailto');
+      var closeDialog = document.getElementById('close-dialog');
+
+      function value(id) { return document.getElementById(id).value.trim(); }
+
+      function buildMailto() {
+        var email = value('email');
+        var summary = value('summary');
+        var product = value('product');
+        var details = value('details');
+        var urgency = value('urgency');
+        var subject = '[Tombot support] ' + summary;
+        var body = [
+          'Support request from realtom.bot/support',
+          '',
+          'Reply-to email: ' + email,
+          'Product/area: ' + product,
+          'Urgency: ' + urgency,
+          '',
+          'Issue summary:',
+          summary,
+          '',
+          'Issue details:',
+          details,
+          '',
+          'Page: ' + window.location.href,
+          'User agent: ' + navigator.userAgent
+        ].join('\n');
+
+        return 'mailto:tombot@agentmail.to?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      }
+
+      function updateFallback() {
+        try { fallback.href = buildMailto(); } catch (e) {}
+      }
+
+      form.addEventListener('input', updateFallback);
+      form.addEventListener('change', updateFallback);
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+          error.classList.add('show');
+          form.reportValidity();
+          return;
+        }
+
+        error.classList.remove('show');
+        var href = buildMailto();
+        fallback.href = href;
+        dialogMailto.href = href;
+        window.location.href = href;
+
+        if (typeof dialog.showModal === 'function') dialog.showModal();
+      });
+
+      closeDialog.addEventListener('click', function () { dialog.close(); });
+      updateFallback();
+    })();
+  </script>
+</body>
+</html>
